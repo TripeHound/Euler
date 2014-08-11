@@ -1,5 +1,5 @@
 @echo off
-	if /i "%~1" == "-s" goto :setEuler
+	if /i "%~1" == "-s" call :setEuler %2 && shift && shift
 	setlocal
 
 	if not defined EULER goto :noeuler
@@ -34,8 +34,9 @@
 	goto :eof
 
 :setEuler
-	set EULER=00%2
+	set EULER=00%1
 	set EULER=%EULER:~-3,3%
+	echo Using Euler_%EULER%
 	goto :eof
 
 :noEuler

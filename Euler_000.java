@@ -2,7 +2,15 @@
 
 import java.io.* ;
 
+//----------------------------------------------------------------------------------
+//
+//	Answer: 
+//----------------------------------------------------------------------------------
+
 public class Euler_00? extends java.applet.Applet {
+	public static long ?( long limit )
+	{
+	}
     public static void main( String[] argv )
     {
 		for( String s : argv )
