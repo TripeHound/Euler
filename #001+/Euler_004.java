@@ -11,14 +11,18 @@ import java.io.* ;
 //	from the product of two 2-digit numbers is 9009 = 91 * 99.
 //
 //	Find the largest palindrome made from the product of two 3-digit numbers.
-//
+//----------------------------------------------------------------------------------
 //	Answer: 906609 (913x993)
 //----------------------------------------------------------------------------------
 
 public class Euler_004 extends java.applet.Applet {
+	//	Only saved for info-sake: the two numbers that produce the palindrom.
+	//
 	public static long max_i = 0 ;
 	public static long max_j = 0 ;
 
+	//	Converts 'n' to a string and checks that characters at opposing ends match.
+	//
 	public static boolean is_palindrome( long n )
 	{
 		String s = String.valueOf( n ) ;
@@ -29,11 +33,14 @@ public class Euler_004 extends java.applet.Applet {
 		return true ;
 
 	}
+
+	//	No attempt at cleverness (if there is any to be had...) just brute all numbers
+	//	of the appropriate size looking for the largest palindrome.
+	//
 	public static long largest_palindrome( long limit )
 	{
-		long lo = (long)Math.pow( 10, limit-1 ) ;
-		long hi = (long)Math.pow( 10, limit   ) - 1 ;
-		//System.err.println( lo + "..." + hi ) ;
+		long lo = (long)Math.pow( 10, limit-1 ) ;			// e.g. 10, 100
+		long hi = (long)Math.pow( 10, limit   ) - 1 ;		// e.g. 99, 999
 
 		long max_palindrome = 0 ;
 		for( long i = lo ; i <= hi ; i++ )
@@ -51,6 +58,7 @@ public class Euler_004 extends java.applet.Applet {
 		}
 		return max_palindrome ;
 	}
+
     public static void main( String[] argv )
     {
 		for( String s : argv )

@@ -14,11 +14,21 @@ import java.io.* ;
 //
 //	By considering the terms in the Fibonacci sequence whose values do not
 //	exceed four million, find the sum of the even-valued terms.
-//
+//----------------------------------------------------------------------------------
 //	Answer: 4613732
+//----------------------------------------------------------------------------------
+//	Uses a fairly brute-force method: calculating all Fibonaci numbers and only
+//	adding those divisible by two.
+//
+//	An improvement might be to note that -- starting with "1, 2" -- the sequence is
+//	"odd, even, odd, odd, even,..." -- i.e. every third number is even -- and so,
+//	with a bit of algebra, proceed from even-to-even each time around the loop.
 //----------------------------------------------------------------------------------
 
 public class Euler_002 extends java.applet.Applet {
+
+	//	Run through all fibonaci numbers below 'limit' adding the even ones.
+	//
 	public static long sum_even_fibonaci( long limit )
 	{
 		long prior = 1 ;
@@ -26,10 +36,8 @@ public class Euler_002 extends java.applet.Applet {
 		long sum = 0 ;
 		while( fibonaci < limit )
 		{
-			//System.err.println( fibonaci ) ;
 			if( fibonaci % 2 == 0 )
 			{
-				//System.err.println( "Adding " + fibonaci ) ;
 				sum += fibonaci ;
 			}
 			long next = prior + fibonaci ;

@@ -10,28 +10,42 @@ import java.io.* ;
 //	The prime factors of 13195 are 5, 7, 13 and 29.
 //
 //	What is the largest prime factor of the number 600851475143 ?
-//
+//----------------------------------------------------------------------------------
 //	Answer: 6857
+//----------------------------------------------------------------------------------
+//	Checking for the next prime is fairly brute-force: a seive of Erasmus (?) may
+//	be marginally better.
 //----------------------------------------------------------------------------------
 
 public class Euler_003 extends java.applet.Applet {
+
+	//	Remove all factors of 'prime' found in 'n', returning what's left.
+	//
 	public static long remove_factors_of( long n, long prime )
 	{
+		//System.err.println( "Remove factors of " + prime + " from " + n ) ;
 		while( n % prime == 0 )
 			n /= prime ;
 		return n ;
 	}
-	public static boolean is_prime( long prime )
+
+	//	Check whether 'candidate' is prime in a relatively crude way, checking
+	//	all odd numbers up to the square-root of the candidate.
+	//
+	public static boolean is_prime( long candidate )
 	{
-		if( prime % 2 == 0 )
+		if( candidate % 2 == 0 )
 			return false ;
-		for( long test=3 ; test * test < prime ; test += 2 )
+		for( long test=3 ; test * test <= candidate ; test += 2 )
 		{
-			if( prime % test == 0 )
+			if( candidate % test == 0 )
 				return false ;
 		}
 		return true ;
 	}
+
+	//	Finds the next prime after 'prime', which is assumed to be odd.
+	//
 	public static long next_prime( long prime )
 	{
 		do {
@@ -39,22 +53,27 @@ public class Euler_003 extends java.applet.Applet {
 		} while( !is_prime( prime ) ) ;
 		return prime ;
 	}
+
+	//	Removes factors of each prime in turn from 'n', until the next prime equals 'n'
+	//	(if we hit '1'; the last prime was repeated in 'n').  Handle '2' outside the
+	//	loop so that next_prime() doesn't have to worry about switching from even to odd.
+	//
 	public static long largest_prime_factor( long n )
 	{
-		long prime = 2 ;
-		n = remove_factors_of( n, prime ) ;
+		n = remove_factors_of( n, 2 ) ;
 		if( n == 1 )
-			return prime ;
-		prime = 3 ;
+			return 2 ;
+		long prime = 3 ;
 		while( prime < n )
 		{
 			n = remove_factors_of( n, prime ) ;
 			if( n == 1 )
-				return prime ;
+				break ;
 			prime = next_prime( prime ) ;
 		}
-		return n ;
+		return prime ;
 	}
+
     public static void main( String[] argv )
     {
 		for( String s : argv )
