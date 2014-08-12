@@ -18,6 +18,7 @@
 	if %NEWEST% == %JAVA% call :buildEuler
 	if not exist %CODE% goto :eof
 
+    echo Running %BASE%
 	java %BASE% %1 %2 %3 %4 %5 %6 %7 %8 %9
 
 	goto :eof
