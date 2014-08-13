@@ -2,8 +2,8 @@
 
 import java.io.* ;
 
-public abstract class EulerProblem extends java.applet.Applet {
-
+public abstract class EulerBase
+{
     public abstract long EulerSolution( long limit ) ;
 
     public static String Description = "The answer to the Euler problem with limit" ;
@@ -32,4 +32,3 @@ public abstract class EulerProblem extends java.applet.Applet {
 		}
 	}
 }
-

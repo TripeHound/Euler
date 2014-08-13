@@ -18,7 +18,7 @@ import java.io.* ;
 //	from a question on CodeReview.
 //----------------------------------------------------------------------------------
 
-public class Euler_001 extends EulerProblem
+public class Euler_001 extends EulerBase
 {
     public Euler_001()
     {
@@ -62,9 +62,10 @@ public class Euler_001 extends EulerProblem
 
 		return sum_3 + sum_5 - sum_15 ;
 	}
-
+/*
     public static void main( String[] argv ) 
     {
         new Euler_001().solve( argv ) ;
     }
+*/
 }

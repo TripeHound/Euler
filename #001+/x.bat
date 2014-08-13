@@ -2,6 +2,8 @@
 	if /i "%~1" == "-s" call :setEuler %2 && shift && shift
 	setlocal
 
+	call jenv
+
 	if not defined EULER goto :noeuler
 
 	set JAVA=Euler_%EULER%.java
@@ -19,19 +21,19 @@
 	if not exist %CODE% goto :eof
 
     echo Running %BASE%
-	java %BASE% %1 %2 %3 %4 %5 %6 %7 %8 %9
+	java EulerShell %EULER% %1 %2 %3 %4 %5 %6 %7 %8 %9
 
 	goto :eof
 
 :buildEuler
 	echo Compiling %JAVA%...
 	if exist %CODE% del %CODE%
-	javac %JAVA%
+	javac EulerShell.java %JAVA%
 	goto :eof
 	
 :editEuler
 	if not exist %JAVA%	copy ..\Euler_000.java %JAVA%
-	vi %JAVA% EulerProblem.java
+	vi %JAVA% EulerBase.java EulerShell.java
 	goto :eof
 
 :setEuler
