@@ -31,7 +31,7 @@
 	
 :editEuler
 	if not exist %JAVA%	copy ..\Euler_000.java %JAVA%
-	vi %JAVA%
+	vi %JAVA% EulerProblem.java
 	goto :eof
 
 :setEuler

@@ -18,7 +18,12 @@ import java.io.* ;
 //	from a question on CodeReview.
 //----------------------------------------------------------------------------------
 
-public class Euler_001 extends java.applet.Applet {
+public class Euler_001 extends EulerProblem
+{
+    public Euler_001()
+    {
+        Description = "Count of multiples of 3 or 5 up to" ;
+    }
 
 	//	Highest multiple of 'factor' that is BELOW 'limit'
 	//
@@ -43,7 +48,8 @@ public class Euler_001 extends java.applet.Applet {
 	//	the third (=the sum of the numbers divisible by both 3 AND 5 which
 	//	otherwise would be included twice).
 	//
-	public static long sum_of_3s_and_5s( long limit )
+	//TODO public static long sum_of_3s_and_5s( long limit )
+	public long EulerSolution( long limit )
 	{
 		long max_3  = highest_multiple( limit,  3 ) ;
 		long max_5  = highest_multiple( limit,  5 ) ;
@@ -57,16 +63,8 @@ public class Euler_001 extends java.applet.Applet {
 		return sum_3 + sum_5 - sum_15 ;
 	}
 
-    public static void main( String[] argv )
+    public static void main( String[] argv ) 
     {
-		for( String s : argv )
-		{
-			long limit = Integer.parseInt( s ) ;
-			long millis = System.nanoTime() ;
-			long answer = sum_of_3s_and_5s( limit ) ;
-			millis = System.nanoTime() - millis ;
-			System.out.println( "Count of multiples of 3 or 5 up to " + limit + " is " + answer ) ;
-			System.out.println( "Time: " + millis / 1000000.0 ) ;
-		}
-	}
+        new Euler_001().solve( argv ) ;
+    }
 }
