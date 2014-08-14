@@ -2,24 +2,33 @@
 
 import java.io.* ;
 
-//----------------------------------------------------------------------------------
-//	Sum square difference
-//	Problem 6
-//	Published on 14 December 2001 at 06:00 pm [Server Time]
-//
-//	The sum of the squares of the first ten natural numbers is,
-//
-//		1^2 + 2^2 + ... + 10^2 = 385
-//
-//	The square of the sum of the first ten natural numbers is,
-//
-//		(1 + 2 + ... + 10)^2 = 55^2 = 3025
-//
-//	Hence the difference between the sum of the squares of the first ten
-//	natural numbers and the square of the sum is 3025 - 385 = 2640.
-//
-//	Find the difference between the sum of the squares of the first one hundred
-//	natural numbers and the square of the sum.
+public class Euler_006 extends EulerBase
+{
+	public Euler_006()
+	{
+		title	= "Sum square difference" ;
+		problem	= "Problem 6\n"
+				+ "Published on 14 December 2001 at 06:00 pm [Server Time]\n"
+				+ "\n"
+				+ "The sum of the squares of the first ten natural numbers is,\n"
+				+ "\n"
+				+ "    1^2 + 2^2 + ... + 10^2 = 385\n"
+				+ "\n"
+				+ "The square of the sum of the first ten natural numbers is,\n"
+				+ "\n"
+				+ "    (1 + 2 + ... + 10)^2 = 55^2 = 3025\n"
+				+ "\n"
+				+ "Hence the difference between the sum of the squares of the first ten\n"
+				+ "natural numbers and the square of the sum is 3025 - 385 = 2640.\n"
+				+ "\n"
+				+ "Find the difference between the sum of the squares of the first one hundred\n"
+				+ "natural numbers and the square of the sum.\n" ;
+		runsets	= new RunSet[] {
+					new RunSet( "Test",		new Run( 10,	2640		) ),
+					new RunSet( "Problem",	new Run( 100,	25164150	) )
+				} ;
+		report	= "Square-of-the-sum less the sum-of-the-squares up to %,d is %,d\n" ;
+	}
 //----------------------------------------------------------------------------------
 //	Answer: 25164150
 //----------------------------------------------------------------------------------
@@ -28,9 +37,8 @@ import java.io.* ;
 //	that could be used.
 //----------------------------------------------------------------------------------
 
-public class Euler_006 extends java.applet.Applet {
-
-	public static long square_sum_less_sum_squares( long limit )
+	//public static long square_sum_less_sum_squares( long limit )
+	protected long solve( long limit )
 	{
 		long sum = 0 ;
 		long sum_of_squares = 0 ;
@@ -43,19 +51,5 @@ public class Euler_006 extends java.applet.Applet {
 		long square_of_sum = sum * sum ;
 
 		return square_of_sum - sum_of_squares ;
-	}
-
-    public static void main( String[] argv )
-    {
-		for( String s : argv )
-		{
-			long limit = Integer.parseInt( s ) ;
-			long millis = System.nanoTime() ;
-			long answer = square_sum_less_sum_squares( limit ) ;
-			millis = System.nanoTime() - millis ;
-			System.out.println( "Square-of-the-sum less the sum-of-the-squares upto " + limit
-								+ " is " + answer ) ;
-			System.out.println( "Time: " + millis / 1000000.0 + "ms" ) ;
-		}
 	}
 }

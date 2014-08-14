@@ -2,14 +2,23 @@
 
 import java.io.* ;
 
-//----------------------------------------------------------------------------------
-//	Largest prime factor
-//	Problem 3
-//	Published on 02 November 2001 at 06:00 pm [Server Time]
-//
-//	The prime factors of 13195 are 5, 7, 13 and 29.
-//
-//	What is the largest prime factor of the number 600851475143 ?
+public class Euler_003 extends EulerBase
+{
+	public Euler_003()
+	{
+		title	= "Largest prime factor" ;
+		problem	= "Problem 3\n"
+				+ "Published on 02 November 2001 at 06:00 pm [Server Time]\n"
+				+ "\n"
+				+ "The prime factors of 13195 are 5, 7, 13 and 29.\n"
+				+ "\n"
+				+ "What is the largest prime factor of the number 600851475143 ?\n" ;
+		runsets	= new RunSet[] {
+					new RunSet( "Test",		new Run( 13195,			29		) ),
+					new RunSet( "Problem",	new Run( 600851475143L,	6857	) )
+				} ;
+		report	= "Largest prime factor of %,d is %,d\n" ;
+	}
 //----------------------------------------------------------------------------------
 //	Answer: 6857
 //----------------------------------------------------------------------------------
@@ -17,11 +26,9 @@ import java.io.* ;
 //	be marginally better.
 //----------------------------------------------------------------------------------
 
-public class Euler_003 extends java.applet.Applet {
-
 	//	Remove all factors of 'prime' found in 'n', returning what's left.
 	//
-	public static long remove_factors_of( long n, long prime )
+	private static long remove_factors_of( long n, long prime )
 	{
 		//System.err.println( "Remove factors of " + prime + " from " + n ) ;
 		while( n % prime == 0 )
@@ -32,7 +39,7 @@ public class Euler_003 extends java.applet.Applet {
 	//	Check whether 'candidate' is prime in a relatively crude way, checking
 	//	all odd numbers up to the square-root of the candidate.
 	//
-	public static boolean is_prime( long candidate )
+	private static boolean is_prime( long candidate )
 	{
 		if( candidate % 2 == 0 )
 			return false ;
@@ -46,7 +53,7 @@ public class Euler_003 extends java.applet.Applet {
 
 	//	Finds the next prime after 'prime', which is assumed to be odd.
 	//
-	public static long next_prime( long prime )
+	private static long next_prime( long prime )
 	{
 		do {
 			prime += 2 ;
@@ -58,7 +65,8 @@ public class Euler_003 extends java.applet.Applet {
 	//	(if we hit '1'; the last prime was repeated in 'n').  Handle '2' outside the
 	//	loop so that next_prime() doesn't have to worry about switching from even to odd.
 	//
-	public static long largest_prime_factor( long n )
+	//public static long largest_prime_factor( long n )
+	protected long solve( long n )
 	{
 		n = remove_factors_of( n, 2 ) ;
 		if( n == 1 )
@@ -72,18 +80,5 @@ public class Euler_003 extends java.applet.Applet {
 			prime = next_prime( prime ) ;
 		}
 		return prime ;
-	}
-
-    public static void main( String[] argv )
-    {
-		for( String s : argv )
-		{
-			long limit = Long.parseLong( s ) ;
-			long millis = System.nanoTime() ;
-			long answer = largest_prime_factor( limit ) ;
-			millis = System.nanoTime() - millis ;
-			System.out.println( "Largest prime factor of " + limit + " is " + answer ) ;
-			System.out.println( "Time: " + millis / 1000000.0 + "ms" ) ;
-		}
 	}
 }

@@ -22,18 +22,31 @@ public class EulerShell extends java.applet.Applet
 		Constructor euler_constructor = euler_class.getConstructor() ;
 		return (EulerBase) euler_constructor.newInstance() ;
 	}
-    public static void main( String[] argv ) 
-    {
+	public static void main( String[] argv ) 
+	{
 		for( String arg : argv )
 		{
+			EulerBase eulerProblem = null ;
 			try
 			{
-				System.out.println( CreateEuler( arg ).Description ) ;
+				//System.out.println( CreateEuler( arg ).Description ) ;
+				eulerProblem = CreateEuler( arg ) ;//.run() ;
 			}
 			catch( Exception ex )
 			{
-				System.out.println( "Cannot find Euler problem '" + arg + "'" ) ;
+				System.out.println( "Cannot find Euler problem '" + arg + "': " + ex.getMessage() ) ;
+			}
+			try
+			{
+				eulerProblem.run() ;
+			}
+			//catch( EulerBase.NoSolutionException ex )
+			//{
+			//}
+			catch( Exception ex )
+			{
+				System.out.println( "Problem solving Euler problem '" + arg + "': " + ex.getMessage() ) ;
 			}
 		}
-    }
+	}
 }

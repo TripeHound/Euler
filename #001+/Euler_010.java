@@ -2,9 +2,9 @@
 
 import java.io.* ;
 
-public class Euler_!EULER! extends EulerBase
+public class Euler_010 extends EulerBase
 {
-	public Euler_!EULER!()
+	public Euler_010()
 	{
 		//title + problem
 		runsets	= new RunSet[] {

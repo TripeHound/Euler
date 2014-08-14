@@ -4,6 +4,8 @@
 
 	call jenv
 
+	if /i "%~1" == "-a" goto :buildAll
+
 	if not defined EULER goto :noeuler
 
 	set JAVA=Euler_%EULER%.java
@@ -30,9 +32,15 @@
 	if exist %CODE% del %CODE%
 	javac EulerShell.java %JAVA%
 	goto :eof
+
+:buildAll
+	for %%a in ( Euler_???.java ) do javac %%a
+	goto :eof
 	
 :editEuler
-	if not exist %JAVA%	copy ..\Euler_000.java %JAVA%
+	if not exist %JAVA% (
+	    vi -e -s -c ":%%s/!EULER!/%EULER%/" -c ":wq %JAVA%" ..\Euler_000.java
+	)
 	vi %JAVA% EulerBase.java EulerShell.java
 	goto :eof
 
