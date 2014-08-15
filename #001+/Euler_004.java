@@ -18,7 +18,7 @@ public class Euler_004 extends EulerBase
 					new RunSet( "Test",		new Run( 2,	9009	) ),
 					new RunSet( "Problem",	new Run( 3,	906609	) )
 				} ;
-		report	= "Largest palindrome from of %,d digit numbers is %,d\n" ;
+		report	= "Largest palindrome from of %,d digit numbers is %,d" ;
 		//TODO: Report the two numbers involved
 	}
 //----------------------------------------------------------------------------------

@@ -5,8 +5,9 @@ import java.lang.reflect.* ;
 
 public class EulerShell extends java.applet.Applet
 {
+	//TODO: move to EulerBase...
 	@SuppressWarnings("unchecked")	//TODO: Use a cast-or-throw version?
-	private static EulerBase CreateEuler( String eulerNo )
+	private static EulerBase CreateEuler( int eulerNo )
 		throws
 			IllegalAccessException,
 			ClassNotFoundException,
@@ -15,38 +16,52 @@ public class EulerShell extends java.applet.Applet
 			InvocationTargetException,
 			ClassCastException
 	{
-		eulerNo = "00" + eulerNo ;
-		eulerNo = eulerNo.substring( eulerNo.length() - 3, eulerNo.length() ) ;
-		String euler_name = "Euler_" + eulerNo ;
+		String euler_name = String.format( "Euler_%03d", eulerNo ) ;
 		Class euler_class = Class.forName( euler_name ) ;
 		Constructor euler_constructor = euler_class.getConstructor() ;
 		return (EulerBase) euler_constructor.newInstance() ;
 	}
+	private static void runProblem( int euler_no )
+	{
+		EulerBase eulerProblem = null ;
+		try
+		{
+			eulerProblem = CreateEuler( euler_no ) ;
+		}
+		catch( Exception ex )
+		{
+			System.out.printf( "Cannot find Euler problem '%d': %s\n", euler_no, ex.getMessage() ) ;
+		}
+		try
+		{
+			eulerProblem.run() ;
+		}
+		catch( Exception ex )
+		{
+			System.out.printf( "Error with Euler problem '%d': %s\n", euler_no, ex.getMessage() ) ;
+		}
+	}
+
 	public static void main( String[] argv ) 
 	{
 		for( String arg : argv )
 		{
-			EulerBase eulerProblem = null ;
-			try
+			if( arg.equals( "-t" ) )
 			{
-				//System.out.println( CreateEuler( arg ).Description ) ;
-				eulerProblem = CreateEuler( arg ) ;//.run() ;
+				EulerBase.titles_only = true ;
 			}
-			catch( Exception ex )
+			else if( arg.contains( "-" ) )
 			{
-				System.out.println( "Cannot find Euler problem '" + arg + "': " + ex.getMessage() ) ;
+				String[] parts = arg.split( "-" ) ;
+				if( parts.length != 2 )
+					throw new RuntimeException( "Invalid command: '" + arg + "'" ) ;
+				int lo = Integer.parseInt( parts[0] ) ;
+				int hi = Integer.parseInt( parts[1] ) ;
+				for( int i = lo ; i <= hi ; i++ )
+					runProblem( i ) ;
 			}
-			try
-			{
-				eulerProblem.run() ;
-			}
-			//catch( EulerBase.NoSolutionException ex )
-			//{
-			//}
-			catch( Exception ex )
-			{
-				System.out.println( "Problem solving Euler problem '" + arg + "': " + ex.getMessage() ) ;
-			}
+			else
+				runProblem( Integer.parseInt( arg ) ) ;
 		}
 	}
 }

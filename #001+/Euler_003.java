@@ -17,7 +17,7 @@ public class Euler_003 extends EulerBase
 					new RunSet( "Test",		new Run( 13195,			29		) ),
 					new RunSet( "Problem",	new Run( 600851475143L,	6857	) )
 				} ;
-		report	= "Largest prime factor of %,d is %,d\n" ;
+		report	= "Largest prime factor of %,d is %,d" ;
 	}
 //----------------------------------------------------------------------------------
 //	Answer: 6857

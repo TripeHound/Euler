@@ -21,7 +21,7 @@ public class Euler_009 extends EulerBase
 					new RunSet( "Test",		new Run( 12,		60			) ),
 					new RunSet( "Problem",	new Run( 1000,		31875000	) )
 				} ;
-		report	= "The product of the pythagorean triple summing to %,d is %,d\n" ;
+		report	= "The product of the pythagorean triple summing to %,d is %,d" ;
 	}
 //----------------------------------------------------------------------------------
 //	Answer: 

@@ -40,7 +40,7 @@ public class Euler_008 extends EulerBase
 					new RunSet( "Test",		new Run( 4,		5832			) ),
 					new RunSet( "Problem",	new Run( 13,	23514624000L	) )
 				} ;
-		report	= "Highet product of %,d digits is %,d\n" ;
+		report	= "Highet product of %,d digits is %,d" ;
 		//TODO: Report digits used (starting at 'first_digit')
 	}
 //----------------------------------------------------------------------------------

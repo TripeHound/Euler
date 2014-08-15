@@ -27,7 +27,7 @@ public class Euler_006 extends EulerBase
 					new RunSet( "Test",		new Run( 10,	2640		) ),
 					new RunSet( "Problem",	new Run( 100,	25164150	) )
 				} ;
-		report	= "Square-of-the-sum less the sum-of-the-squares up to %,d is %,d\n" ;
+		report	= "Square-of-the-sum less the sum-of-the-squares up to %,d is %,d" ;
 	}
 //----------------------------------------------------------------------------------
 //	Answer: 25164150

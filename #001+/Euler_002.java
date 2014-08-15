@@ -21,7 +21,7 @@ public class Euler_002 extends EulerBase
 					new RunSet( "Test",		new Run( 100,		44		) ),
 					new RunSet( "Problem",	new Run( 4000000,	4613732	) )
 				} ;
-		report	= "Sum of even fibonaci numbers below %,d is %,d\n" ;
+		report	= "Sum of even fibonaci numbers below %,d is %,d" ;
 	}
 //----------------------------------------------------------------------------------
 //	Answer: 4613732

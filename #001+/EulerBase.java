@@ -56,6 +56,8 @@ public abstract class EulerBase
 	protected String	report		= "Input=%,d, Answer=%,d" ;
 	protected RunSet[]	runsets		= null ;
 
+	protected String other_info() { return null ; }//TODO:Improve
+
 	protected void showTitle()
 	{
 		System.out.println( title ) ;
@@ -67,6 +69,11 @@ public abstract class EulerBase
 	protected void showReport( long input, long answer )
 	{
 		System.out.printf( report, input, answer ) ;
+		String other = other_info() ;
+		if( other != null )
+			System.out.printf( " (%s)\n", other_info() ) ;
+		else
+			System.out.println() ;
 	}
 
 	protected abstract long solve( long input )
@@ -85,7 +92,7 @@ public abstract class EulerBase
 			try {
 				long answer = solve( run.input ) ;
 				nanos = System.nanoTime() - nanos ;
-				System.out.printf( "%7.4f", nanos / 1000000.0 ) ;
+				System.out.printf( "%8.4f", nanos / 1000000.0 ) ;
 				System.out.print( " " + run.statusStr( answer ) + " " ) ;
 				showReport( run.input, answer ) ;
 			}
@@ -96,11 +103,14 @@ public abstract class EulerBase
 			set_name = "" ;
 		}
 	}
-	public void run(/*TODO modes*/)
+	public static boolean titles_only = false ;	//TODO: get/setters?
+	public void run()
 		//throws NoSolutionException
 	{
 		System.out.printf( "%s - %s\n", getClass().getName(), title ) ;
 
+		if( titles_only )
+			return ;
 		for( RunSet runset : runsets )
 		{
 			run( runset ) ;

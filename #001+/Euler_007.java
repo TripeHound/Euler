@@ -18,7 +18,7 @@ public class Euler_007 extends EulerBase
 					new RunSet( "Test",		new Run( 6,		13		) ),
 					new RunSet( "Problem",	new Run( 10001,	104743	) )
 				} ;
-		report	= "The %,dth prime is %,d\n" ;
+		report	= "The %,dth prime is %,d" ;
 	}
 //----------------------------------------------------------------------------------
 //	Answer: 104743

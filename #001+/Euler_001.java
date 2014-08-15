@@ -22,7 +22,7 @@ public class Euler_001 extends EulerBase
 											new Run( 1000	),
 											new Run( 10000	) )
 				} ;
-		report	= "Count of multiples of 3 or 5 up to %,d is %,d\n" ;
+		report	= "Count of multiples of 3 or 5 up to %,d is %,d" ;
 	}
 //----------------------------------------------------------------------------------
 //	Method (calculating the sum rather than iterating through all numbers) came

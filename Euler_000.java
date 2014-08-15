@@ -9,15 +9,16 @@ public class Euler_!EULER! extends EulerBase
 		//title + problem
 		runsets	= new RunSet[] {
 					new RunSet( "Test",		new Run( ,			) ),
-					new RunSet( "Problem",	new Run( ,	UNSPECIFIED	) )
+					new RunSet( "Problem",	new Run( ,	Run.UNSPECIFIED	) )
 				} ;
-		report	= "Input %d is %d\n" ;
+		report	= "Input %,d is %,d" ;
 	}
 
 //----------------------------------------------------------------------------------
 
-	protected long solve( long limit )
+	protected long solve( long input )
+		throws NoSolutionException
 	{
-		throw NoSolutionException() ;
+		throw new NoSolutionException() ;
 	}
 }

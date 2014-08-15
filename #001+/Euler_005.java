@@ -19,7 +19,7 @@ public class Euler_005 extends EulerBase
 					new RunSet( "Test",		new Run( 20,	232792560	) ),
 					new RunSet( "Problem",	new Run( 10,	2520		) )
 				} ;
-		report	= "Smallest multiple of 1 x 2 x ... x %,d is %,d\n" ;
+		report	= "Smallest multiple of 1 x 2 x ... x %,d is %,d" ;
 	}
 //----------------------------------------------------------------------------------
 //	Answer: 232792560
