@@ -1,4 +1,4 @@
-// vim:ai:ts=4:ic:aw
+// vim:ai:ts=4:ic:aw:noet
 
 import java.io.* ;
 
@@ -23,7 +23,7 @@ public class Euler_007 extends EulerBase
 //----------------------------------------------------------------------------------
 //	Answer: 104743
 //----------------------------------------------------------------------------------
-//  Very crude: just cycle through odd numbers checking for primeness.
+//	Very crude: just cycle through odd numbers checking for primeness.
 //----------------------------------------------------------------------------------
 
 	//	Check whether 'candidate' is prime in a relatively crude way, checking
@@ -54,13 +54,13 @@ public class Euler_007 extends EulerBase
 	//public static long find_nth_prime( long n )
 	protected long solve( long n )
 	{
-        if( n == 1 )
-            return 2 ;
-        long prime = 3 ;
-        for( long i = 2 ; i < n ; i++ )
-        {
-            prime = next_prime( prime ) ;
-        }
-        return prime ;
+		if( n == 1 )
+			return 2 ;
+		long prime = 3 ;
+		for( long i = 2 ; i < n ; i++ )
+		{
+			prime = next_prime( prime ) ;
+		}
+		return prime ;
 	}
 }

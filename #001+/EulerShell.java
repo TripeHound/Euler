@@ -1,4 +1,4 @@
-// vim:ai:ts=4:ic:aw
+// vim:ai:ts=4:ic:aw:noet
 
 import java.io.* ;
 import java.lang.reflect.* ;

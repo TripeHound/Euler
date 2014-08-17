@@ -1,4 +1,4 @@
-// vim:ai:ts=4:ic:aw
+// vim:ai:ts=4:ic:aw:noet
 
 import java.io.* ;
 
@@ -65,7 +65,8 @@ public class Euler_012 extends EulerBase
 //		72 == 2^3 . 3^2
 //	so:
 //		        4  .  3 = 12 is the number of factors!
-//	See: http://www.wikihow.com/Find-How-Many-Factors-Are-in-a-Number
+//
+//	See: http://www.wikihow.com/Find-How-Many-Factors-Are-in-a-Number       TODO
 //
 
 	private static long very_slow_count_factors( long number )
