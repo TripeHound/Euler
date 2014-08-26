@@ -67,6 +67,7 @@
 
 	echo Compiling %JAVA%...
 	if exist %CODE% del %CODE%
+	if not exist obj mkdir obj
 	javac -d obj %JAVA%
 	goto :eof
 

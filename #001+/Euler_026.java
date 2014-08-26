@@ -1,6 +1,7 @@
 // vim:ai:ts=4:ic:aw:noet
 
 import java.io.* ;
+import java.math.BigInteger ;
 
 public class Euler_026 extends EulerBase
 {
@@ -37,12 +38,58 @@ public class Euler_026 extends EulerBase
 	}
 
 //----------------------------------------------------------------------------------
+//	Given:
+//			1/n = 0.xyz(abcde)
+//	then:
+//			10^3/n = xyz.(abcde)
+//	and:
+//			10^5.10^3/n = xyzabcde.(abcde)
+//	thus:
+//			10^5.10^3/n - 10^3/n = 10^3.(10^5 - 1)/n = xyzabcde - xyz	[no fraction]
+//
+//	Therefore, finding the first '10^j.(10^k - 1)' that is an exact multiple of 'n' will
+//	give the number of leading digits ('j') and the cycle-length ('k').
+//
+//	By examination, the maximum for 'j' is 3 for n=1..9 (1/n = 0.125).  Higher ...
 
-	protected long solve( Object input )
-		throws NoSolutionException
+	private static int j, k ;
+
+	private static int cycle_length( long _n )
 	{
-		Long limit = (Long) input ;
+		int max_j = 3 ;
+		for( long nn = _n ; nn > 0 ; nn /= 10 )
+			max_j++ ;
 
-		throw new NoSolutionException() ;
+		BigInteger   n = new BigInteger( new Long(_n).toString() ) ;
+		BigInteger one = new BigInteger(  "1" ) ;
+		BigInteger ten = new BigInteger( "10" ) ;
+
+		for( k = 1 ; true ; k++ )
+		{
+			BigInteger ten_k_1 = new BigInteger( "10" ).pow( k ).subtract( one ) ;
+			for( j = 0 ; j <= max_j ; j++ )
+			{
+				BigInteger ten_j = new BigInteger( "10" ).pow( j ) ;
+				//System.out.printf( "%20s %20s %20s %d\n", ten_j.toString(), ten_k_1.toString(), /*( ten_j * (ten_k - 1))*/"", n ) ;
+				if( ten_j.multiply( ten_k_1 ).mod( n ).bitCount() == 0 )
+					return k ;
+			}
+		}
+	}
+	protected long solve( long limit )
+	{
+		int max_cycle = 0 ;
+
+		for( int n = 1 ; n < limit ; n++ )
+		{
+			int cycle_length = cycle_length( n ) ;
+			if( cycle_length > max_cycle )
+			{
+				System.out.printf( "%4d %4d %4d %40.20f\n", n, j, k, 1.0/n ) ;
+				max_cycle = cycle_length ;
+			}
+		}
+
+		return max_cycle ;
 	}
 }
