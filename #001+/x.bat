@@ -1,8 +1,12 @@
 @echo off
+::	vim:ai:ts=4:ic:aw:noet
+
 	if /i "%~1" == "-s" call :setEuler %2 && shift && shift
 	setlocal
 
 	call jenv
+
+	set DEPEND=EulerBase.java EulerShell.java
 
 	if /i "%~1" == "-a" goto :buildAll
 
@@ -15,7 +19,8 @@
 	if /i "%~1" == "-v" shift && call :editEuler
 
     call :make
-goto :run
+	goto :run
+
 	set NEWEST=
 	for /f %%a in ('dir /b/od %JAVA% %CODE%') do set NEWEST=%%a
 
@@ -23,10 +28,10 @@ goto :run
 
 	if %NEWEST% == %JAVA% call :buildEuler
 	if not exist %CODE% goto :eof
-:run
 
+:run
     echo Running %BASE%
-	java EulerShell %EULER% %1 %2 %3 %4 %5 %6 %7 %8 %9
+	java -cp obj;. EulerShell %EULER% %1 %2 %3 %4 %5 %6 %7 %8 %9
 
 	goto :eof
 
@@ -44,7 +49,7 @@ goto :run
 	if not exist %JAVA% (
 	    vi -e -s -c ":%%s/!EULER!/%EULER%/" -c ":wq %JAVA%" ..\Euler_000.java
 	)
-	vi %JAVA% EulerBase.java EulerShell.java
+	vi %JAVA% %DEPEND%
 	goto :eof
 
 :make
@@ -53,16 +58,16 @@ goto :run
 
 :makeFile
 	set JAVA=%1
-	set CODE=%~n1.class
+	set CODE=obj\%~n1.class
 
 	set NEWEST=
-	for /f %%a in ('dir /b/od %~n1.*') do set NEWEST=%%a
-	if not defined NEWEST goto :eof
-	if not %NEWEST% == %JAVA% goto :eof
+	for /f %%a in ('ls -1rt %JAVA% %DEPEND% %CODE% 2^>nul') do set NEWEST=%%a
+	if not defined NEWEST echo Source for %BASE% does not exist!&& goto :eof
+	if %NEWEST% == %CODE% goto :eof
 
 	echo Compiling %JAVA%...
 	if exist %CODE% del %CODE%
-	javac %JAVA%
+	javac -d obj %JAVA%
 	goto :eof
 
 

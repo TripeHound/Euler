@@ -91,8 +91,21 @@ public abstract class EulerBase
 			System.out.println() ;
 	}
 
-	protected abstract long solve( Object input )
-		throws NoSolutionException ;
+	protected /*abstract*/ long solve( long input )
+		throws NoSolutionException
+	{
+		throw new NoSolutionException() ;
+	}
+	protected /*abstract*/ long solve( Object input )
+		throws NoSolutionException
+	{
+		if( input.getClass() == Long.class )
+		{
+			long long_input = (Long) input ;
+			return solve( long_input ) ;
+		}
+		throw new NoSolutionException() ;
+	}
 
 	protected void run( RunSet runset )
 		//throws NoSolutionException
