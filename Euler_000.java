@@ -16,9 +16,11 @@ public class Euler_!EULER! extends EulerBase
 
 //----------------------------------------------------------------------------------
 
-	protected long solve( long input )
+	protected long solve( Object input )
 		throws NoSolutionException
 	{
+		Long limit = (Long) input ;
+
 		throw new NoSolutionException() ;
 	}
 }

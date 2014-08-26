@@ -32,9 +32,9 @@ public class EulerShell extends java.applet.Applet
 		{
 			System.out.printf( "Cannot find Euler problem '%d': %s\n", euler_no, ex.getMessage() ) ;
 		}
+			eulerProblem.run() ;
 		try
 		{
-			eulerProblem.run() ;
 		}
 		catch( Exception ex )
 		{

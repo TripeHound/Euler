@@ -1,4 +1,5 @@
 // vim:ai:ts=4:ic:aw:noet
+// vim:ai:ts=4:ic:aw:noet
 
 import java.io.* ;
 
@@ -16,8 +17,8 @@ public class Euler_005 extends EulerBase
 				+ "What is the smallest positive number that is evenly divisible by all of the\n"
 				+ "numbers from 1 to 20?\n" ;
 		runsets	= new RunSet[] {
-					new RunSet( "Test",		new Run( 20,	232792560	) ),
-					new RunSet( "Problem",	new Run( 10,	2520		) )
+					new RunSet( "Test",		new Run( 10,	2520		) ),
+					new RunSet( "Problem",	new Run( 20,	232792560	) )
 				} ;
 		report	= "Smallest multiple of 1 x 2 x ... x %,d is %,d" ;
 	}

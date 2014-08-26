@@ -11,14 +11,26 @@ public abstract class EulerBase
 	protected class Run
 	{
 		public static final long UNSPECIFIED = -1 ;	//TODO:Better way needed if answers can be -ve.
-		public long input ;
-		public long answer ;
+		
+		public Object	input ;
+		public long		answer ;
+
 		public Run( long input, long answer )
 		{
 			this.input	= input ;
 			this.answer	= answer ;
 		}
+		public Run( Object input, long answer )
+		{
+			this.input	= input ;
+			this.answer	= answer ;
+		}
 		public Run( long input )
+		{
+			this.input	= input ;
+			this.answer	= UNSPECIFIED ;
+		}
+		public Run( Object input )
 		{
 			this.input	= input ;
 			this.answer	= UNSPECIFIED ;
@@ -45,16 +57,12 @@ public abstract class EulerBase
 			this.name = name ;
 			this.runList = runList ;
 		}
-/*		public RunSet( String name, Run[] runList )
-		{
-			this.name = name ;
-			this.runList = runList ;
-		}*/
 	}
 	protected String	title		= "An unspecified Euler problem" ;
 	protected String	problem		= "Do something clever with maths" ;
 	protected String	report		= "Input=%,d, Answer=%,d" ;
 	protected RunSet[]	runsets		= null ;
+	protected Class		inputClass	= Long.class ;
 
 	protected String other_info() { return null ; }//TODO:Improve
 
@@ -66,9 +74,16 @@ public abstract class EulerBase
 	{
 		System.out.println( problem ) ;
 	}
-	protected void showReport( long input, long answer )
+	protected long reportInput( Object input )
 	{
-		System.out.printf( report, input, answer ) ;
+		return (Long) input ;
+	}
+	protected void showReport( Object input, long answer )
+	{
+		//System.out.printf( "::%s::\n", input.getClass().getName() ) ;
+		//System.out.printf( "::%s::\n", inputClass.getName() ) ;
+		System.out.printf( report, reportInput( input ), answer ) ;
+		//System.out.printf( report, reportInput( inputClass.cast( input ) ), answer ) ;
 		String other = other_info() ;
 		if( other != null )
 			System.out.printf( " (%s)\n", other_info() ) ;
@@ -76,7 +91,7 @@ public abstract class EulerBase
 			System.out.println() ;
 	}
 
-	protected abstract long solve( long input )
+	protected abstract long solve( Object input )
 		throws NoSolutionException ;
 
 	protected void run( RunSet runset )
@@ -86,8 +101,6 @@ public abstract class EulerBase
 		for( Run run : runset.runList )
 		{
 			System.out.printf( "%"+"10"+"s ", set_name ) ;
-			//System.out.printf( "%*s ", set_name_width, set_name ) ;
-			//System.out.print( set_name ) ;
 			long nanos = System.nanoTime() ;
 			try {
 				long answer = solve( run.input ) ;
@@ -116,18 +129,4 @@ public abstract class EulerBase
 			run( runset ) ;
 		}
 	}
-	/*
-	public void solve( String[] argv )
-	{
-		for( String s : argv )
-		{
-			long limit = Integer.parseInt( s ) ;	//TODO Method to override if more than one parameter needed?
-			long millis = System.nanoTime() ;
-			long answer = solve( limit ) ;
-			millis = System.nanoTime() - millis ;
-			showReport( limit, answer ) ;
-			System.out.println( "Time: " + millis / 1000000.0 ) ;
-		}
-	}
-	*/
 }

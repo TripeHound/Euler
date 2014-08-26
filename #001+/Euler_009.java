@@ -9,6 +9,7 @@ public class Euler_009 extends EulerBase
 		title	= "Special Pythagorean triplet" ;
 		problem	= "Problem 9\n"
 				+ "Published on 25 January 2002 at 06:00 pm [Server Time]\n"
+				+ "\n"
 				+ "A Pythagorean triplet is a set of three natural numbers, a < b < c, for which,\n"
 				+ "\n"
 				+ "    a^2 + b^2 = c^2\n"
