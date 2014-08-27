@@ -32,7 +32,7 @@ public class Euler_026 extends EulerBase
 
 		runsets	= new RunSet[] {
 					new RunSet( "Test",		new Run( 10,	7		) ),
-					new RunSet( "Problem",	new Run( 1000,	Run.UNSPECIFIED	) )
+					new RunSet( "Problem",	new Run( 1000,	983		) )
 				} ;
 		report	= "Longest recurring-cycle for 1/n, where n < %,d is for n=%,d" ;
 	}
@@ -53,43 +53,66 @@ public class Euler_026 extends EulerBase
 //	By examination, the maximum for 'j' is 3 for n=1..9 (1/n = 0.125).  Higher ...
 
 	private static int j, k ;
+	private static String fraction ;
 
 	private static int cycle_length( long _n )
 	{
 		int max_j = 3 ;
 		for( long nn = _n ; nn > 0 ; nn /= 10 )
 			max_j++ ;
+		max_j = 10 ;//TODO
 
-		BigInteger   n = new BigInteger( new Long(_n).toString() ) ;
+		BigInteger   n = new BigInteger( new Long(_n).toString() ) ;//TODO:Can't be right?!
 		BigInteger one = new BigInteger(  "1" ) ;
 		BigInteger ten = new BigInteger( "10" ) ;
+		BigInteger ten_j ;
+		BigInteger ten_k ;
+		BigInteger ten_k_1 ;
 
-		for( k = 1 ; true ; k++ )
+		for( k = 0 ; true ; k++ )
 		{
-			BigInteger ten_k_1 = new BigInteger( "10" ).pow( k ).subtract( one ) ;
+			ten_k = new BigInteger( "10" ).pow( k ) ;
+			if( k != 0 )
+				ten_k_1 = ten_k.subtract( one ) ;
+			else
+				ten_k_1 = one ;
+
 			for( j = 0 ; j <= max_j ; j++ )
 			{
-				BigInteger ten_j = new BigInteger( "10" ).pow( j ) ;
-				//System.out.printf( "%20s %20s %20s %d\n", ten_j.toString(), ten_k_1.toString(), /*( ten_j * (ten_k - 1))*/"", n ) ;
+				ten_j = new BigInteger( "10" ).pow( j ) ;
 				if( ten_j.multiply( ten_k_1 ).mod( n ).bitCount() == 0 )
+				{
+				/*Debug
+					String whole = ten_j.multiply( ten_k ).divide( n ).toString() ;
+					while( whole.length() < (j+k) )
+						whole = "0" + whole ;
+					fraction = String.format( "1/%4d (%3d,%3d): 0.%s(%s)...",
+									_n, j, k,
+									whole.substring( 0, j ),
+									whole.substring( j ) ) ;
+					//System.out.println( fraction ) ;
+				*/
 					return k ;
+				}
 			}
 		}
 	}
 	protected long solve( long limit )
 	{
 		int max_cycle = 0 ;
+		int longest_n = 0 ;
 
 		for( int n = 1 ; n < limit ; n++ )
 		{
 			int cycle_length = cycle_length( n ) ;
 			if( cycle_length > max_cycle )
 			{
-				System.out.printf( "%4d %4d %4d %40.20f\n", n, j, k, 1.0/n ) ;
+				//System.out.println( fraction ) ;
 				max_cycle = cycle_length ;
+				longest_n = n ;
 			}
 		}
 
-		return max_cycle ;
+		return longest_n ;
 	}
 }
