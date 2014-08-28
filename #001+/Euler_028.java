@@ -25,8 +25,8 @@ public class Euler_028 extends EulerBase
 				+ "formed in the same way?\n" ;
 
 		runsets	= new RunSet[] {
-					new RunSet( "Test",		new Run( 5,		101	) ),
-					new RunSet( "Problem",	new Run( 1001,	Run.UNSPECIFIED	) )
+					new RunSet( "Test",		new Run( 5,		101			) ),
+					new RunSet( "Problem",	new Run( 1001,	669171001	) )
 				} ;
 
 		report	= "Diagnoal-sum of a %,d x %<,d spiral is %,d" ;
@@ -38,11 +38,15 @@ public class Euler_028 extends EulerBase
 	{
 		long sum = 1 ;
 		long number = 1 ;
-		for( long i=1 ; i < input ; i++ )
+
+		for( long step = 2 ; step < input ; step += 2 )
 		{
-			number += 2*i ;
-			sum += number ;
-			System.out.printf( "n=%04d  sum=%04d\n", number, sum ) ;
+			for( int corner  = 0 ; corner < 4 ; corner++ )
+			{
+				number += step ;
+				sum += number ;
+				//System.out.printf( "n=%4d  sum=%4d\n", number, sum ) ;
+			}
 		}
 		return sum ;
 	}

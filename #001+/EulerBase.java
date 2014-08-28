@@ -118,7 +118,7 @@ public abstract class EulerBase
 			try {
 				long answer = solve( run.input ) ;
 				nanos = System.nanoTime() - nanos ;
-				System.out.printf( "%8.4f", nanos / 1000000.0 ) ;
+				System.out.printf( "%9.4f", nanos / 1000000.0 ) ;
 				System.out.print( " " + run.statusStr( answer ) + " " ) ;
 				showReport( run.input, answer ) ;
 			}
